@@ -26,18 +26,21 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build
+    - name: Install packages 📦
+      run: npm ci
+    - name: Build app 🔨
+      run: npm run build
       env:
         NEXT_PUBLIC_BASE_PATH: '/nextjs-blog'
-    - run: npm run export
+    - name: Export the static site 📤
+      run: npm run export
       env:
         NEXT_PUBLIC_BASE_PATH: '/nextjs-blog'
-    - run: touch ./out/.nojekyll
+    - name: Disabling Jekyll 🚫
+      run: touch ./out/.nojekyll
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         branch: gh-pages # The branch the action should deploy to.
         folder: out # The folder the action should deploy.
