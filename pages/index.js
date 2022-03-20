@@ -7,6 +7,8 @@ const customLoader = ({ src }) => {
   return src
 }
 
+const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export async function getStaticProps() {
   const files = fs.readdirSync('posts');
 
@@ -42,7 +44,7 @@ export default function Home({ posts }) {
                 width={800}
                 height={450}
                 alt={frontmatter.title}
-                src={`/${frontmatter.socialImage}`}
+                src={prefix+`/${frontmatter.socialImage}`}
               />
               <div className='p-4'>
                 <h1 className='text-2xl font-bold'>{frontmatter.title}</h1>
